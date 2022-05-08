@@ -6,7 +6,7 @@ function Flight(props) {
   const [departDate, setDepartDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [flightOptions, setFlightOptions] = useState([]);
-
+  //TODO departure and return date error handling
   function submit(event, props) {
     event.preventDefault();
     var returnDateParam = returnDate ? "&returnDate=" + returnDate : "";

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import Locate from './components/Locate';
-import Flight from './components/Flight';
-import Confirm from './components/Confirm';
-import Order from './components/Order';
+import React, { useState } from "react";
+import Locate from "./components/Locate";
+import Flight from "./components/Flight";
+import Confirm from "./components/Confirm";
+import Order from "./components/Order";
 
 export default function App() {
   const [origin, setOrigin] = useState();
@@ -13,18 +13,19 @@ export default function App() {
 
   return (
     <div>
-      <Locate handleChoice={setDestination} display={"Origin"}/>
-      <Locate handleChoice={setOrigin} display={"Destination"}/>
-      { origin && 
-        destination && 
-        <Flight origin={origin} destination={destination} setFlight={setFlight}/> 
-      }
-      { flight &&
-        <Confirm flight={flight} setConfirmation={setConfirmation} /> 
-      }
-      { confirmation &&
-        <Order confirmation={confirmation} order={order} setOrder={setOrder} /> 
-      }
+      <Locate handleChoice={setOrigin} display={"Origin"} />
+      <Locate handleChoice={setDestination} display={"Destination"} />
+      {origin && destination && (
+        <Flight
+          origin={origin}
+          destination={destination}
+          setFlight={setFlight}
+        />
+      )}
+      {flight && <Confirm flight={flight} setConfirmation={setConfirmation} />}
+      {confirmation && (
+        <Order confirmation={confirmation} order={order} setOrder={setOrder} />
+      )}
     </div>
-  )
+  );
 }

@@ -94,8 +94,11 @@ app.post(`/flight-confirmation`, (req, res) => {
 
 app.post(`/flight-booking`, (req, res) => {
   // Book a flight
+  console.log("req.body", req.body);
+  console.log("req.body.data", req.body.data);
   const flight = req.body.flight;
   const name = req.body.name;
+  const dateOfBirth = req.body.dob;
 
   amadeus.booking.flightOrders
     .post(
@@ -106,14 +109,14 @@ app.post(`/flight-booking`, (req, res) => {
           travelers: [
             {
               id: "1",
-              dateOfBirth: "1982-01-16",
+              dateOfBirth: dateOfBirth,
               name: {
                 firstName: name.first,
                 lastName: name.last,
               },
               gender: "MALE",
               contact: {
-                emailAddress: "jorge.gonzales833@telefonica.es",
+                emailAddress: "mariano_farace@hotmail.com",
                 phones: [
                   {
                     deviceType: "MOBILE",

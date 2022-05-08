@@ -10,7 +10,6 @@ function Flight(props) {
   function submit(event, props) {
     event.preventDefault();
     var returnDateParam = returnDate ? "&returnDate=" + returnDate : "";
-    console.log("returnDateParam", returnDateParam);
     //TODO Make this readable
     fetch(
       `http://localhost:5000/flight-search?originCode=${props.origin}&destinationCode=${props.destination}&dateOfDeparture=${departDate}&adults=${passengers}&${returnDateParam}`,

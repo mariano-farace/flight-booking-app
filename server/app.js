@@ -30,7 +30,6 @@ app.use(requestLogger);
 
 app.get(`/city-and-airport-search/:parameter`, (req, res) => {
   const parameter = req.params.parameter;
-  console.log("parameter: ", parameter);
   // Which cities or airports start with the parameter variable
   amadeus.referenceData.locations
     .get({
@@ -38,7 +37,6 @@ app.get(`/city-and-airport-search/:parameter`, (req, res) => {
       subType: Amadeus.location.any,
     })
     .then(function (response) {
-      console.log("response.data: ", response.data);
       res.send(response.result);
     })
     .catch(function (response) {
@@ -49,14 +47,11 @@ app.get(`/city-and-airport-search/:parameter`, (req, res) => {
 //Search flights between two locations and desired travel dates: Amadeus Flight Offers Search API
 app.get(`/flight-search`, (req, res) => {
   //TODO clean this code
-  console.log("req.query: ", req.query);
   const originCode = req.query.originCode;
   const destinationCode = req.query.destinationCode;
   const dateOfDeparture = req.query.dateOfDeparture;
   const dateOfReturn = req.query.returnDate;
-  console.log("dateOfReturn: ", dateOfReturn);
   const adults = req.query.adults;
-  console.log("typeof adults", typeof adults);
   // Find the cheapest flights
   amadeus.shopping.flightOffersSearch
     .get({
@@ -67,13 +62,9 @@ app.get(`/flight-search`, (req, res) => {
       max: "10",
     })
     .then(function (response) {
-      console.log("los vuelos que devuelve:::", response.result);
-
       res.send(response.result);
     })
     .catch(function (response) {
-      console.log("hay error:::", response);
-
       res.send(response);
     });
 });
@@ -81,7 +72,6 @@ app.get(`/flight-search`, (req, res) => {
 //Confirming a flight: Amadeus Flight Offers Price API.
 app.post(`/flight-confirmation`, (req, res) => {
   const flight = req.body;
-  console.log("flightMariano: ", flight);
   // Confirm availability and price
   amadeus.shopping.flightOffers.pricing
     .post(
@@ -93,12 +83,9 @@ app.post(`/flight-confirmation`, (req, res) => {
       })
     )
     .then(function (response) {
-      console.log("response: ", response);
-
       res.send(response.result);
     })
     .catch(function (response) {
-      console.log("error: ", response);
       res.send(response);
     });
 });

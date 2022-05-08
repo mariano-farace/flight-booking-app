@@ -1,0 +1,120 @@
+{
+  "flight": {
+    "type": "flight-offer",
+    "id": "1",
+    "source": "GDS",
+    "instantTicketingRequired": false,
+    "nonHomogeneous": false,
+    "oneWay": false,
+    "lastTicketingDate": "2022-05-09",
+    "numberOfBookableSeats": 1,
+    "itineraries": [
+      {
+        "duration": "PT14H38M",
+        "segments": [
+          {
+            "departure": {
+              "iataCode": "LGW",
+              "terminal": "N",
+              "at": "2022-10-10T13:00:00"
+            },
+            "arrival": {
+              "iataCode": "YYC",
+              "at": "2022-10-10T15:00:00"
+            },
+            "carrierCode": "WS",
+            "number": "2",
+            "aircraft": {
+              "code": "789"
+            },
+            "operating": {
+              "carrierCode": "WS"
+            },
+            "duration": "PT9H",
+            "id": "13",
+            "numberOfStops": 0,
+            "blacklistedInEU": false
+          },
+          {
+            "departure": {
+              "iataCode": "YYC",
+              "at": "2022-10-10T17:45:00"
+            },
+            "arrival": {
+              "iataCode": "SFO",
+              "terminal": "I",
+              "at": "2022-10-10T19:38:00"
+            },
+            "carrierCode": "WS",
+            "number": "1520",
+            "aircraft": {
+              "code": "73H"
+            },
+            "operating": {
+              "carrierCode": "WS"
+            },
+            "duration": "PT2H53M",
+            "id": "14",
+            "numberOfStops": 0,
+            "blacklistedInEU": false
+          }
+        ]
+      }
+    ],
+    "price": {
+      "currency": "EUR",
+      "total": "387.03",
+      "base": "105.00",
+      "fees": [
+        {
+          "amount": "0.00",
+          "type": "SUPPLIER"
+        },
+        {
+          "amount": "0.00",
+          "type": "TICKETING"
+        }
+      ],
+      "grandTotal": "387.03"
+    },
+    "pricingOptions": {
+      "fareType": ["PUBLISHED"],
+      "includedCheckedBagsOnly": false
+    },
+    "validatingAirlineCodes": ["WS"],
+    "travelerPricings": [
+      {
+        "travelerId": "1",
+        "fareOption": "STANDARD",
+        "travelerType": "ADULT",
+        "price": {
+          "currency": "EUR",
+          "total": "387.03",
+          "base": "105.00"
+        },
+        "fareDetailsBySegment": [
+          {
+            "segmentId": "13",
+            "cabin": "ECONOMY",
+            "fareBasis": "LP0D0ZEG",
+            "brandedFare": "ECONO",
+            "class": "L",
+            "includedCheckedBags": {
+              "quantity": 0
+            }
+          },
+          {
+            "segmentId": "14",
+            "cabin": "ECONOMY",
+            "fareBasis": "LTVD0ZEG",
+            "brandedFare": "ECONO",
+            "class": "L",
+            "includedCheckedBags": {
+              "quantity": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

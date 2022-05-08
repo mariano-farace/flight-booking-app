@@ -48,22 +48,32 @@ app.get(`/city-and-airport-search/:parameter`, (req, res) => {
 
 //Search flights between two locations and desired travel dates: Amadeus Flight Offers Search API
 app.get(`/flight-search`, (req, res) => {
+  //TODO clean this code
+  console.log("req.query: ", req.query);
   const originCode = req.query.originCode;
   const destinationCode = req.query.destinationCode;
   const dateOfDeparture = req.query.dateOfDeparture;
+  const dateOfReturn = req.query.returnDate;
+  console.log("dateOfReturn: ", dateOfReturn);
+  const adults = req.query.adults;
+  console.log("typeof adults", typeof adults);
   // Find the cheapest flights
   amadeus.shopping.flightOffersSearch
     .get({
       originLocationCode: originCode,
       destinationLocationCode: destinationCode,
       departureDate: dateOfDeparture,
-      adults: "1",
-      max: "7",
+      adults: parseInt(adults),
+      max: "10",
     })
     .then(function (response) {
+      console.log("los vuelos que devuelve:::", response.result);
+
       res.send(response.result);
     })
     .catch(function (response) {
+      console.log("hay error:::", response);
+
       res.send(response);
     });
 });

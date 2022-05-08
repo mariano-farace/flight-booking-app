@@ -10,10 +10,10 @@ function Flight(props) {
   function submit(event, props) {
     event.preventDefault();
     var returnDateParam = returnDate ? "&returnDate=" + returnDate : "";
-
+    console.log("returnDateParam", returnDateParam);
     //TODO Make this readable
     fetch(
-      `http://localhost:5000/flight-search?originCode=${props.origin}&destinationCode=${props.destination}&dateOfDeparture=${departDate}&adult=${passengers}&${returnDateParam}`,
+      `http://localhost:5000/flight-search?originCode=${props.origin}&destinationCode=${props.destination}&dateOfDeparture=${departDate}&adults=${passengers}&${returnDateParam}`,
       {
         method: "GET",
         headers: {
@@ -23,7 +23,10 @@ function Flight(props) {
     )
       .then((response) => response.json())
       .then((json) => {
-        setFlightOptions(json);
+        console.log("json: ", json);
+        const flightResults = json.data;
+        console.log("flightResults: ", flightResults);
+        setFlightOptions(flightResults);
       });
   }
 

@@ -3,13 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const Amadeus = require("amadeus");
 const { API_KEY, API_SECRET } = require("./config.js");
+const { requestLogger } = require("./helpers.js");
 
 const app = express();
 const PORT = 5000;
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: "*",
   })
 );
 
@@ -23,10 +24,13 @@ const amadeus = new Amadeus({
   clientSecret: API_SECRET,
 });
 
+app.use(requestLogger);
+
 //City and airport search: Amadeus Airport & City Search API
 
 app.get(`/city-and-airport-search/:parameter`, (req, res) => {
   const parameter = req.params.parameter;
+  console.log("parameter: ", parameter);
   // Which cities or airports start with the parameter variable
   amadeus.referenceData.locations
     .get({
@@ -34,6 +38,7 @@ app.get(`/city-and-airport-search/:parameter`, (req, res) => {
       subType: Amadeus.location.any,
     })
     .then(function (response) {
+      console.log("response.data: ", response.data);
       res.send(response.result);
     })
     .catch(function (response) {

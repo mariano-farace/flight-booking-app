@@ -80,7 +80,8 @@ app.get(`/flight-search`, (req, res) => {
 
 //Confirming a flight: Amadeus Flight Offers Price API.
 app.post(`/flight-confirmation`, (req, res) => {
-  const flight = req.body.flight;
+  const flight = req.body;
+  console.log("flightMariano: ", flight);
   // Confirm availability and price
   amadeus.shopping.flightOffers.pricing
     .post(
@@ -92,9 +93,12 @@ app.post(`/flight-confirmation`, (req, res) => {
       })
     )
     .then(function (response) {
+      console.log("response: ", response);
+
       res.send(response.result);
     })
     .catch(function (response) {
+      console.log("error: ", response);
       res.send(response);
     });
 });

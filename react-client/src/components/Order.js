@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function Order(props) {
   console.log("Aca tendria que estar el vuelo props", props);
+  //TODO revisar este state, no se si es necesario
   const [traveler, setTraveler] = useState("");
   const [fname, setFname] = useState("Harryette");
   const [lname, setLname] = useState("Mullen");
@@ -14,7 +15,8 @@ function Order(props) {
 
   function submit(event, props) {
     const dataForBookingFlight = {
-      flight: props.confirmation.data.flightOffers,
+      //!Esta es la parte problematica
+      flight: props.confirmation.data.flightOffers[0],
       traveler: traveler,
     };
     event.preventDefault();

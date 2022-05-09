@@ -22,9 +22,7 @@ function Flight(props) {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log("json: ", json);
         const flightResults = json.data;
-        console.log("flightResults: ", flightResults);
         setFlightOptions(flightResults);
       });
   }

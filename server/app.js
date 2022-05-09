@@ -50,8 +50,9 @@ app.get(`/flight-search`, (req, res) => {
   const originCode = req.query.originCode;
   const destinationCode = req.query.destinationCode;
   const dateOfDeparture = req.query.dateOfDeparture;
-  const dateOfReturn = req.query.returnDate;
+  const returnDate = req.query.returnDate;
   const adults = req.query.adults;
+
   // Find the cheapest flights
   amadeus.shopping.flightOffersSearch
     .get({
@@ -59,7 +60,9 @@ app.get(`/flight-search`, (req, res) => {
       destinationLocationCode: destinationCode,
       departureDate: dateOfDeparture,
       adults: parseInt(adults),
-      max: "10",
+      returnDate,
+      max: "7",
+      //TODO falta la fecha de vuelta!!
     })
     .then(function (response) {
       res.send(response.result);
@@ -83,6 +86,10 @@ app.post(`/flight-confirmation`, (req, res) => {
       })
     )
     .then(function (response) {
+      const result = response.result;
+      //TODO borrar
+      // const ConfirmationResponseResult = JSON.stringify(result);
+      // console.log("ConfirmationResponseResult", ConfirmationResponseResult);
       res.send(response.result);
     })
     .catch(function (response) {
@@ -95,24 +102,25 @@ app.post(`/flight-confirmation`, (req, res) => {
 app.post(`/flight-booking`, (req, res) => {
   // Book a flight
   console.log("req.body", req.body);
-  console.log("req.body.data", req.body.data);
-  const flight = req.body.flight;
-  const name = req.body.name;
-  const dateOfBirth = req.body.dob;
 
+  const flight = req.body.flight;
+  console.log("stringy:::::::::::", JSON.stringify(flight));
+  const traveler = req.body.traveler;
+  console.log("typeof flight", typeof flight);
   amadeus.booking.flightOrders
     .post(
       JSON.stringify({
         data: {
           type: "flight-order",
+          //TODO sacar el array de flight, y sacar en el back el [0]
           flightOffers: [flight],
           travelers: [
             {
               id: "1",
-              dateOfBirth: dateOfBirth,
+              dateOfBirth: traveler.dob,
               name: {
-                firstName: name.first,
-                lastName: name.last,
+                firstName: traveler.fname,
+                lastName: traveler.lname,
               },
               gender: "MALE",
               contact: {
@@ -148,6 +156,7 @@ app.post(`/flight-booking`, (req, res) => {
       res.send(response.result);
     }) //TODO handle errors like missing data
     .catch(function (response) {
+      console.log("ERROR!!!:", response);
       res.send(response);
     });
 });

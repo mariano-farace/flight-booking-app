@@ -10,11 +10,9 @@ function Locate(props) {
     e.preventDefault();
     fetch(`http://localhost:5000/city-and-airport-search/${value}`)
       .then((response) => {
-        console.log("response: ", response);
         return response.json();
       })
       .then((json) => {
-        console.log("json: ", json);
         setLocations(json.data);
       });
   };
